@@ -8,7 +8,7 @@
     "firecms",
     "hyperf"
   ],
-  "description": "",
+  "description": "hyperf 扩展：图片验证码",
   "autoload": {
     "psr-4": {
       "FirecmsExt\\Captcha\\": "src/"
@@ -21,14 +21,15 @@
   },
   "require": {
     "php": ">=8.0",
-    "hyperf/di": "^v2.0|^v3.0",
-    "hyperf/framework": "^v2.0|^v3.0",
-    "hyperf/http-server": "^v2.0|^v3.0",
-    "hyperf/session": "^v2.0|^v3.0",
-    "hyperf/validation": "^v2.0|^v3.0",
-    "hyperf/cache": "^v2.0|^v3.0",
     "ext-gd": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "firecms-ext/utils": "*",
+    "hyperf/cache": "~v2.0",
+    "hyperf/di": "~v2.0",
+    "hyperf/framework": "~v2.0",
+    "hyperf/http-server": "~v2.0",
+    "hyperf/session": "~v2.0",
+    "hyperf/validation": "~v2.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.0",
@@ -54,9 +55,6 @@
   "extra": {
     "hyperf": {
       "config": "FirecmsExt\\Captcha\\ConfigProvider"
-    },
-    "branch-alias": {
-      "dev-master": "1.0-dev"
     }
   }
 }

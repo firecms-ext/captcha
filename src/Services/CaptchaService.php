@@ -75,7 +75,7 @@ class CaptchaService implements CaptchaServiceInterface
      */
     public function __construct(ConfigInterface $config, protected CacheInterface $cache, protected SessionInterface $session)
     {
-        foreach ($config->get('captcha') as $key => $value) {
+        foreach ((array) $config->get('captcha') as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->{$key} = $value;
             }
@@ -176,7 +176,7 @@ class CaptchaService implements CaptchaServiceInterface
     public function check(string $code, ?string $key = null): bool
     {
         if ($key) {
-            $data = $this->decrypt($key);
+            $data = decrypt($key);
         } else {
             $data = $this->session->get('captcha.key', null);
         }
@@ -348,7 +348,7 @@ class CaptchaService implements CaptchaServiceInterface
 
         return [
             'value' => $bag,
-            'key' => $this->encrypt([
+            'key' => encrypt([
                 'hash' => $hash,
                 'expired_at' => strtotime($this->expired . ' seconds'),
             ]),
