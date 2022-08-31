@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @link     https://www.klmis.cn
  * @document https://www.klmis.cn
  * @contact  zhimengxingyun@klmis.cn
- * @license  https://gitee.com/firecms-ext/captcha/blob/master/LICENSE
+ * @license  https://github.com/firecms-ext/captcha/blob/master/LICENSE
  */
 namespace FirecmsExt\Captcha\Exceptions;
 

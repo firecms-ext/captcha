@@ -23,7 +23,7 @@
     "php": ">=8.0",
     "ext-gd": "*",
     "ext-openssl": "*",
-    "firecms-ext/utils": "*",
+    "firecms-ext/crypt": "*",
     "hyperf/cache": "~v2.0",
     "hyperf/di": "~v2.0",
     "hyperf/framework": "~v2.0",
