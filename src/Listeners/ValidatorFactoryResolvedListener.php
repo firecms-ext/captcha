@@ -35,12 +35,11 @@ class ValidatorFactoryResolvedListener implements ListenerInterface
 
         $validatorFactory->extend('captcha', function ($attribute, $value, $parameters, $validator) {
             /* @var Validator $validator */
-            if (env('APP_ENV') === 'dev') {
-                // return true;
-            }
 
+            $key = reset($parameters);
+            $key = $key ?: rtrim($attribute, '_code') . '_key';
             return make(CaptchaServiceInterface::class)
-                ->check($value, $validator->getData()[reset($parameters) ?: str_replace('_code', '_key', $attribute)]);
+                ->check($value, $validator->getData()[$key]);
         });
 
         $validatorFactory->replacer('captcha', function ($message, $attribute, $rule, $parameters) {

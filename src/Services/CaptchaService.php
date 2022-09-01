@@ -73,7 +73,7 @@ class CaptchaService implements CaptchaServiceInterface
     /**
      * 初始化.
      */
-    public function __construct(ConfigInterface $config, protected CacheInterface $cache, protected SessionInterface $session)
+    public function __construct(protected ConfigInterface $config, protected CacheInterface $cache, protected SessionInterface $session)
     {
         foreach ((array) $config->get('captcha') as $key => $value) {
             if (property_exists($this, $key)) {
@@ -175,6 +175,11 @@ class CaptchaService implements CaptchaServiceInterface
      */
     public function check(string $code, ?string $key = null): bool
     {
+        // 不启用直接跳过
+        if (! $this->config->get('captcha.enable', true)) {
+            return true;
+        }
+
         if ($key) {
             $data = decrypt($key);
         } else {
