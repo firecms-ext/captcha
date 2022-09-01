@@ -1,7 +1,17 @@
 # firecms-ext/captcha
 
-```
+```shell
+# 验证码 依赖安装
 composer require firecms-ext/captcha
+# 发布配置
+php bin/hyperf.php vendor:publish firecms-ext/captcha
+
+# 加密解密 依赖安装
+composer require firecms-ext/crypt
+# 发布配置
+php bin/hyperf.php vendor:publish firecms-ext/crypt
+# 生成密钥
+php bin/hyperf.php gen:app-key
 ```
 
 ## 发布 Session 配置
@@ -59,5 +69,7 @@ class CaptchaRequest extends FormRequest
 
 ```
 
-> **注意：** captcha_code
+> **注意：** 
+> captcha_code 验证码；
+> captcha_key 密文；可选，默认读取 属性名称 + _key
 > 
