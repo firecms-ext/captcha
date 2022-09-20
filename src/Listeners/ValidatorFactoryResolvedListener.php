@@ -11,14 +11,12 @@ declare(strict_types=1);
  */
 namespace FirecmsExt\Captcha\Listeners;
 
-use FirecmsExt\Captcha\CaptchaServiceInterface;
-use Hyperf\Event\Annotation\Listener;
+use FirecmsExt\Captcha\Contracts\CaptchaServiceInterface;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use Hyperf\Validation\Event\ValidatorFactoryResolved;
 use Hyperf\Validation\Validator;
 
-#[Listener]
 class ValidatorFactoryResolvedListener implements ListenerInterface
 {
     public function listen(): array
