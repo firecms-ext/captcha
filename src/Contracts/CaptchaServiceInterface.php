@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  zhimengxingyun@klmis.cn
  * @license  https://github.com/firecms-ext/captcha/blob/master/LICENSE
  */
-namespace FirecmsExt\Captcha;
+namespace FirecmsExt\Captcha\Contracts;
 
 interface CaptchaServiceInterface
 {
@@ -19,7 +19,4 @@ interface CaptchaServiceInterface
 
     public function check(string $code, ?string $key = null);
 
-    public function encrypt(array $data);
-
-    public function decrypt(string $encrypt);
 }

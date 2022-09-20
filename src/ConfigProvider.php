@@ -11,6 +11,8 @@ declare(strict_types=1);
  */
 namespace FirecmsExt\Captcha;
 
+
+use FirecmsExt\Captcha\Contracts\CaptchaServiceInterface;
 use FirecmsExt\Captcha\Services\CaptchaService;
 
 class ConfigProvider

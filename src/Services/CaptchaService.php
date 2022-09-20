@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace FirecmsExt\Captcha\Services;
 
-use FirecmsExt\Captcha\CaptchaServiceInterface;
+use FirecmsExt\Captcha\Contracts\CaptchaServiceInterface;
 use GdImage;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Contract\SessionInterface;
@@ -69,6 +69,9 @@ class CaptchaService implements CaptchaServiceInterface
 
     // 验证码字体颜色
     private int|false $color;
+
+    // 缓存 key
+    private string $cache_key = 'captcha_blacklist:';
 
     /**
      * 初始化.
@@ -196,32 +199,15 @@ class CaptchaService implements CaptchaServiceInterface
 
         if ($bool) {
             // 是否加入黑名单
-            $bool = ! $this->cache->has('captcha_blacklist:' . $data['hash']);
+            $cache_key = $this->cache_key . md5($key);
+            $bool = ! $this->cache->has($cache_key);
             if ($bool && $ttl = $data['expired_at'] - $datetime) {
                 // 加入黑名单
-                $this->cache->set('captcha_blacklist:' . $data['hash'], $ttl, $ttl);
+                $this->cache->set($cache_key, $ttl, $ttl);
             }
         }
 
         return $bool;
-    }
-
-    /**
-     * 加密.
-     */
-    public function encrypt(array $data): bool|string
-    {
-        return openssl_encrypt(serialize($data), 'AES-128-ECB', $this->codeSet);
-    }
-
-    /**
-     * 解密.
-     */
-    public function decrypt(string $encrypt): array|null
-    {
-        $serialize = openssl_decrypt($encrypt, 'AES-128-ECB', $this->codeSet);
-
-        return $serialize ? unserialize($serialize) : null;
     }
 
     /**
