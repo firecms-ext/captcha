@@ -27,7 +27,6 @@
     "hyperf/cache": "~v2.0",
     "hyperf/di": "~v2.0",
     "hyperf/framework": "~v2.0",
-    "hyperf/http-server": "~v2.0",
     "hyperf/session": "~v2.0",
     "hyperf/validation": "~v2.0"
   },
