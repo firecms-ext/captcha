@@ -149,10 +149,10 @@ class CaptchaService implements CaptchaServiceInterface
     /**
      * API调用.
      */
-    public function api(): array
+    public function api(array $options = []): array
     {
         // 生成 验证码
-        $generator = $this->generate();
+        $generator = $this->generate($options);
 
         return [
             'key' => $generator['key'],
@@ -312,7 +312,7 @@ class CaptchaService implements CaptchaServiceInterface
     /**
      * 生成 验证码
      */
-    protected function generate(): array
+    protected function generate(array $options = []): array
     {
         $bag = '';
 
@@ -341,6 +341,7 @@ class CaptchaService implements CaptchaServiceInterface
             'value' => $bag,
             'key' => encrypt([
                 'hash' => $hash,
+                'options' => $options,
                 'expired_at' => strtotime($this->expired . ' seconds'),
             ]),
         ];
