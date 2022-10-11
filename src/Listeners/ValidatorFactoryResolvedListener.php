@@ -13,6 +13,7 @@ namespace FirecmsExt\Captcha\Listeners;
 
 use FirecmsExt\Captcha\Contracts\CaptchaServiceInterface;
 use Hyperf\Event\Contract\ListenerInterface;
+use Hyperf\Utils\ApplicationContext;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use Hyperf\Validation\Event\ValidatorFactoryResolved;
 use Hyperf\Validation\Validator;
@@ -36,7 +37,8 @@ class ValidatorFactoryResolvedListener implements ListenerInterface
 
             $key = reset($parameters);
             $key = $key ?: rtrim($attribute, '_code') . '_key';
-            return make(CaptchaServiceInterface::class)
+            return ApplicationContext::getContainer()
+                ->get(CaptchaServiceInterface::class)
                 ->check($value, $validator->getData()[$key]);
         });
 
