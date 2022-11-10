@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  zhimengxingyun@klmis.cn
  * @license  https://github.com/firecms-ext/captcha/blob/master/LICENSE
  */
+
 namespace FirecmsExt\Captcha\Listeners;
 
 use FirecmsExt\Captcha\Contracts\CaptchaServiceInterface;
@@ -37,9 +38,16 @@ class ValidatorFactoryResolvedListener implements ListenerInterface
 
             $key = reset($parameters);
             $key = $key ?: rtrim($attribute, '_code') . '_key';
-            return ApplicationContext::getContainer()
-                ->get(CaptchaServiceInterface::class)
-                ->check($value, $validator->getData()[$key]);
+            try {
+                return ApplicationContext::getContainer()
+                    ->get(CaptchaServiceInterface::class)
+                    ->check($value, $validator->getData()[$key]);
+            } catch (\Exception $e) {
+                $validator->setCustomMessages([
+                    'captcha' => __('message.' . $e->getMessage()),
+                ]);
+            }
+            return false;
         });
 
         $validatorFactory->replacer('captcha', function ($message, $attribute, $rule, $parameters) {
