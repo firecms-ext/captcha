@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace FirecmsExt\Captcha\Services;
 
 use FirecmsExt\Captcha\Contracts\CaptchaServiceInterface;
-use GdImage;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Contract\SessionInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -65,7 +64,7 @@ class CaptchaService implements CaptchaServiceInterface
     protected int $quality = 60;
 
     // 验证码图片实例
-    private GdImage|false $im;
+    private \GdImage|false $im;
 
     // 验证码字体颜色
     private int|false $color;

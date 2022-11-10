@@ -11,7 +11,6 @@ declare(strict_types=1);
  */
 namespace FirecmsExt\Captcha;
 
-
 use FirecmsExt\Captcha\Contracts\CaptchaServiceInterface;
 use FirecmsExt\Captcha\Listeners\ValidatorFactoryResolvedListener;
 use FirecmsExt\Captcha\Services\CaptchaService;
@@ -34,7 +33,7 @@ class ConfigProvider
                 ],
             ],
             'listeners' => [
-                ValidatorFactoryResolvedListener::class
+                ValidatorFactoryResolvedListener::class,
             ],
             'publish' => [
                 [

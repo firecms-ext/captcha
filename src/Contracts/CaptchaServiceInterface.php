@@ -18,5 +18,4 @@ interface CaptchaServiceInterface
     public function output();
 
     public function check(string $code, ?string $key = null);
-
 }
