@@ -13,7 +13,7 @@ namespace FirecmsExt\Captcha\Contracts;
 
 interface CaptchaServiceInterface
 {
-    public function api();
+    public function api(array $options = []);
 
     public function output();
 
